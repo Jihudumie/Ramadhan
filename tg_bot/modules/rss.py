@@ -63,7 +63,7 @@ def list_urls(bot, update):
 
     # check if the length of the message is too long to be posted in 1 chat bubble
     if len(final_content) == 0:
-        bot.send_message(chat_id=tg_chat_id, text="This chat is not subscribed to any links")
+        bot.send_message(chat_id=tg_chat_id, text="Katika chat hii Hauja sajiri kiunga cha Rss au link yeyote ")
     elif len(final_content) <= constants.MAX_MESSAGE_LENGTH:
         bot.send_message(chat_id=tg_chat_id, text="This chat is subscribed to the following links:\n" + final_content)
     else:
@@ -160,7 +160,7 @@ def rss_update(bot, job):
         else:
             pass
 
-        if len(new_entry_links) < 5:
+        if len(new_entry_links) < 100:
             # this loop sends every new update to each user from each group based on the DB entries
             for link, title in zip(reversed(new_entry_links), reversed(new_entry_titles)):
                 final_message = "<b>{}</b>\n\n{}".format(html.escape(title), html.escape(link))
@@ -171,7 +171,7 @@ def rss_update(bot, job):
                     bot.send_message(chat_id=tg_chat_id, text="<b>Warning:</b> The message is too long to be sent",
                                      parse_mode=ParseMode.HTML)
         else:
-            for link, title in zip(reversed(new_entry_links[-5:]), reversed(new_entry_titles[-5:])):
+            for link, title in zip(reversed(new_entry_links[-100:]), reversed(new_entry_titles[-100:])):
                 final_message = "<b>{}</b>\n\n{}".format(html.escape(title), html.escape(link))
 
                 if len(final_message) <= constants.MAX_MESSAGE_LENGTH:
@@ -182,7 +182,7 @@ def rss_update(bot, job):
 
             bot.send_message(chat_id=tg_chat_id, parse_mode=ParseMode.HTML,
                              text="<b>Warning: </b>{} occurrences have been left out to prevent spam"
-                             .format(len(new_entry_links) - 5))
+                             .format(len(new_entry_links) - 100))
 
 
 def rss_set(bot, job):
@@ -216,20 +216,26 @@ def rss_set(bot, job):
 
 
 __help__ = """
- - /addrss <link>: add an RSS link to the subscriptions.
- - /removerss <link>: removes the RSS link from the subscriptions.
- - /rss <link>: shows the link's data and the last entry, for testing purposes.
- - /listrss: shows the list of rss feeds that the chat is currently subscribed to.
+Rss ni kiunga au link ya rss ambayo inafanya kazi ya ku, post habari au kitu mfano wa habari unacho kitaka kutoka popote Mfano @HabariTz wana tumia rss
+Pia @fullStori pia Hao wana tumia rss\n
+ - /addrss <link>: ongeza kiunga cha RSS kwa usajili.
+ - /removerss <link>: huondoa kiunga cha RSS kutoka kwa usajili.
+ - /rss <link>: Ina onyesha Mala ya Mwisho Kufanya kazi Rss link utakayo ijalibu.
+ - /listrss: inaonyesha orodha ya milisho au link za rss ambazo bot imesajili kwa sasa.
 
-NOTE: In groups, only admins can add/remove RSS links to the group's subscription
+NOTE: Katika Vikundi au group Viongozi tu ndio wataweza 
+\n1. Add rss link
+\n2. Remove rss link
+\n3. Kuona list ya Rss link ulizo sajili
+ ..
 """
 
 __mod_name__ = "RSS Feed"
 
 job = updater.job_queue
 
-job_rss_set = job.run_once(rss_set, 5)
-job_rss_update = job.run_repeating(rss_update, interval=60, first=60)
+job_rss_set = job.run_once(rss_set, 100)
+job_rss_update = job.run_repeating(rss_update, interval=5, first=5)
 job_rss_set.enabled = True
 job_rss_update.enabled = True
 
