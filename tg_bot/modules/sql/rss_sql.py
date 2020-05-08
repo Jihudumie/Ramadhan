@@ -12,6 +12,16 @@ class RSS(BASE):
     feed_link = Column(UnicodeText)
     old_entry_link = Column(UnicodeText)
 
+    def __init__(self, chat_id, feed_link, old_entry_link):
+        self.chat_id = chat_id
+        self.feed_link = feed_link
+        self.old_entry_link = old_entry_link
+
+    def __repr__(self):
+        return "<RSS for chatID {} at feed_link {} with old_entry_link {}>".format(self.chat_id,
+                                                                                   self.feed_link,
+                                                                                   self.old_entry_link)
+
 
 RSS.__table__.create(checkfirst=True)
 INSERTION_LOCK = threading.RLock()
