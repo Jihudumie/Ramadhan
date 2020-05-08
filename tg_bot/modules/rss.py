@@ -229,14 +229,14 @@ __mod_name__ = "RSS Feed"
 job = updater.job_queue
 
 job_rss_set = job.run_once(rss_set, 5)
-job_rss_update = job.run_repeating(rss_update, interval=60, first=60)
+job_rss_update = job.run_repeating(rss_update, interval=5, first=5)
 job_rss_set.enabled = True
 job_rss_update.enabled = True
 
 SHOW_URL_HANDLER = CommandHandler("rss", show_url, pass_args=True)
-ADD_URL_HANDLER = CommandHandler("addrss", add_url, pass_args=True)
-REMOVE_URL_HANDLER = CommandHandler("removerss", remove_url, pass_args=True)
-LIST_URLS_HANDLER = CommandHandler("listrss", list_urls)
+ADD_URL_HANDLER = CommandHandler("or", add_url, pass_args=True)
+REMOVE_URL_HANDLER = CommandHandler("fr", remove_url, pass_args=True)
+LIST_URLS_HANDLER = CommandHandler("lr", list_urls)
 
 dispatcher.add_handler(SHOW_URL_HANDLER)
 dispatcher.add_handler(ADD_URL_HANDLER)
