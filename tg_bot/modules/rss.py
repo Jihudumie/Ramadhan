@@ -98,7 +98,7 @@ def add_url(bot, update, args):
             else:
                 sql.add_url(tg_chat_id, tg_feed_link, tg_old_entry_link)
 
-                update.effective_message.reply_text("Added URL to subscription")
+                update.effective_message.reply_text("Imeongezwa URL katika usajili")
         else:
             update.effective_message.reply_text("This link is not an RSS Feed link")
     else:
@@ -120,11 +120,11 @@ def remove_url(bot, update, args):
             if user_data:
                 sql.remove_url(tg_chat_id, tg_feed_link)
 
-                update.effective_message.reply_text("Removed URL from subscription")
+                update.effective_message.reply_text("Imeondolewa URL kutoka kwenye usajili")
             else:
                 update.effective_message.reply_text("You haven't subscribed to this URL yet")
         else:
-            update.effective_message.reply_text("This link is not an RSS Feed link")
+            update.effective_message.reply_text("Link hii sio kiunganisho cha RSS")
     else:
         update.effective_message.reply_text("URL missing")
 
@@ -228,7 +228,6 @@ __mod_name__ = "RSS Feed"
 
 job = updater.job_queue
 
-job_rss_set = job.run_once(rss_set, 5)
 job_rss_update = job.run_repeating(rss_update, interval=5, first=5)
 job_rss_set.enabled = True
 job_rss_update.enabled = True
