@@ -433,6 +433,10 @@ def main():
     khamis_handler = CommandHandler("khamis", khamis)
     migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
 
+    khamys_handler = CommandHandler("khamys", khamys)
+    migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
+
+
     # dispatcher.add_handler(test_handler)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(help_handler)
@@ -441,6 +445,7 @@ def main():
     dispatcher.add_handler(settings_callback_handler)
     dispatcher.add_handler(migrate_handler)
     dispatcher.add_handler(khamis_handler)
+    dispatcher.add_handler(khamys_handler)
 
     # dispatcher.add_error_handler(error_callback)
 
