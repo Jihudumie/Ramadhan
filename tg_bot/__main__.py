@@ -55,6 +55,7 @@ And the following:
 DONATE_STRING = """Amani Iwe nawe. Kama una hitaji Robot Kama Hili kwa Ajili ya Group Lako Karibu tuongee 
 [Khamis](https://t.me/Twuwbaa)
 Natumia Furusa Hii kukukalibisha Katika Kikundi Chetu cha @Huduma"""
+KHAMIS_NAJALIBU = "Majalibio"
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -371,6 +372,15 @@ def get_settings(bot: Bot, update: Update):
 
     else:
         send_settings(chat.id, user.id, True)
+
+
+@run_async
+def khamys(bot: Bot, update: Update):
+    user = update.effective_message.from_user
+    chat = update.effective_chat  # type: Optional[Chat]
+
+    if chat.type == "private":
+        update.effective_message.reply_text(KHAMIS_NAJALIBU, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
 @run_async
