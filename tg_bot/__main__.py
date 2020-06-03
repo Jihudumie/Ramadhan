@@ -379,6 +379,7 @@ def khamys(bot: Bot, update: Update):
     user = update.effective_message.from_user
     chat = update.effective_chat  # type: Optional[Chat]
 
+   if chat.type == "private":
         update.effective_message.reply_text(KHAMIS_NAJALIBU, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
