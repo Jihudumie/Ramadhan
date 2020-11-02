@@ -532,6 +532,11 @@ def process_update(self, update):
 
     CHATS_CNT[update.effective_chat.id] = cnt
     for group in self.groups:
+        try:
+            for handler in (x for x in self.handlers[group] if x.check_update(update)):
+                handler.handle_update(update, self)
+                break
+
             
         # Stop processing with any other handler.
         except DispatcherHandlerStop:
