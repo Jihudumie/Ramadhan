@@ -19,77 +19,50 @@ from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
-Hi {}, my name is {}! <u>بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ</u>
-       ➠ /Jihaad 🖲
-       ➠ /buluwgh  🖲
-<b>JIHAAD</b> imekusanya kila aina ya ibada za kiroho na kiwiliwili, kuikinai dunia, kuihama nchi na kuyahama matamanio na hii ndiyo maana ikapewa jina la ‘Uchaji Allaah’, kwani imekuja katika Hadiyth kuwa:
+Habari yako *{}*, Mimi ni Robot Jinalangu ni *{}*! 
 
 <b>‘Uchaji __Allaah wa umma wangu ni Jihaad__ katika njia ya Allaah.”</b>
-
 Na ndani yake mna kuitakasa nafsi, kuitakasa mali, na kumuuzia Allaah nafsi, na haya yote ni matunda ya mapenzi na imani na yakini na kuelekea kwa Allaah (Subhaanahu wa Ta’ala).
-
 NDUGU ZANGU KATIKA IMAAN, MIMI NDUGU YENU NIMETENGENEZEA ROBOT HII 👉 @JihaadBot. ILI TUPATE KUJIFUNZA KWA WEPESI NA KWA WAKATI WOWOTE.
-
 __Gusa hapa__ ➠ /Jihaad
 __Au hapo__ ➠/buluwgh
-
  Kupata Vitabu 📚 Au darsa 📖
-
 Mtume wa Allaah (Swalla Allaahu ‘alayhi wa sallam) amesema:
 <b>“Shahidi hahisi maumivu ya kuuliwa ila kama mmoja wenu anavyohisi maumivu ya kufinywa.”</b>
-
 Hayo  Na Mengine Allah Atakuonyesha Hapa ➠/jihaad:
-
 ➠ /help Kwa Msaada zaidi..
-
 Kwa elimu zaidi  
 ➠ @AbdallaahBot
 ➠ @HamisBot"""  
 HELP_USER = """<b>Hapa ni sehemu ya Msaada</b>
-
 🖲 <a
 href='https://telegra.ph/I-LOVE-ISLAM-04-21'>I LOVE ISLAM</a>
-
 Kama una Hitaji Kusoma Au Kusiliza Qur'an Tukufu.
 ❖ @Furqanbot
-
 <u>Kwa Darsa Mbali Mbali. 
 Txt 📄, Audio 🎧, Video & File N.k.</u>
 ❖ @Hamisbot
 ❖ @AbdallaahBot
-
 Kuongea ✆ Na Mimi Au Viongozi Tuandikie ✍
 Kupitia hapo ☞@ViongoziBot, Na Shidayako itafika Kwetu
-Kwa Idhini ya Allah Tutakusaidia In Shaa Allah.
-
-Allah Akujaalie Wepesi Katika Mambo yako na Akupe <b>Mwisho Mwema</b> Aamiyn
-
-       ➠ /Jihaad 🖲
-       ➠ /buluwgh  🖲"""
-
+Kwa Idhini ya Allah Tutakusaidia In Shaa Allah."""
 HELP_STRINGS = """
-Hey there! My name is *{}*.
-I'm a modular group management bot with a few fun extras! Have a look at the following for an idea of some of \
-the things I can help you with.
+Karibu Katika Menu Zangu.
 
-*Main* commands available:
- - /start: start the bot
- - /help: PM's you this message.
- - /help <module name>: PM's you info about that module.
- - /Khamis: *Amani ya Allah Iwe nawe Karibu tuongee!*
- - /settings:
-   - in PM: will send you your settings for all supported modules.
-   - in a group: will redirect you to pm, with all that chat's settings.
+Anza na Alama hii 👉 / or !.
+"""
+DONATE_STRING = """*Assalaam Aleykum* Habaari za Saahizi, Hii nisehemu inayo husu Utengenezaji [my creator](t.me/Twuwbaa).\
+Khamis Au Hamis Nimtengenezaji Wa Marobot Hapa Telegram Kama una hitaji Kutengenezewa Robot Kama hili onana na Mimia au nitafute Katika @Huduma
+"""
+AMLIZETU = """
+1. /ors Ongejaga
 
-{}
-And the following:
-""".format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
+2. /frs Futaga
 
-DONATE_STRING = """Amani Iwe nawe. Kama una hitaji Robot Kama Hili kwa Ajili ya Group Lako Karibu tuongee 
-[Khamis](https://t.me/Twuwbaa)
-Natumia Furusa Hii kukukalibisha Katika Kikundi Chetu cha @Huduma"""
-KHAMIS_NAJALIBU = "Majalibio"
+3. /rs lolaga 👀
 
+4. /lrs idadi
+"""
 IMPORTED = {}
 MIGRATEABLE = []
 HELPABLE = {}
@@ -406,25 +379,35 @@ def get_settings(bot: Bot, update: Update):
     else:
         send_settings(chat.id, user.id, True)
 
-
 @run_async
-def khamys(bot: Bot, update: Update):
+def amlizangu(bot: Bot, update: Update):
     user = update.effective_message.from_user
     chat = update.effective_chat  # type: Optional[Chat]
 
     if chat.type == "private":
-        update.effective_message.reply_text(KHAMIS_NAJALIBU, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        update.effective_message.reply_text(AMLIZETU, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
 @run_async
-def khamis(bot: Bot, update: Update):
+def donate(bot: Bot, update: Update):
     user = update.effective_message.from_user
     chat = update.effective_chat  # type: Optional[Chat]
 
     if chat.type == "private":
-            update.effective_message.reply_text("Contact me in PM to get the list of possible commands.",
-                                            reply_markup=InlineKeyboardMarkup(
-                                                [[InlineKeyboardButton(text="Help,)]])
+        update.effective_message.reply_text(DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+
+        if OWNER_ID != 254318997 and DONATION_LINK:
+            update.effective_message.reply_text("You can also donate to the person currently running me "
+                                                "[here]()".format(DONATION_LINK),
+                                                parse_mode=ParseMode.MARKDOWN)
+
+    else:
+        try:
+            bot.send_message(user.id, DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+
+            update.effective_message.reply_text("I've PM'ed you about donating to my creator!")
+        except Unauthorized:
+            update.effective_message.reply_text("Contact me in PM first to get donation information.")
 
 
 def migrate_chats(bot: Bot, update: Update):
@@ -456,12 +439,11 @@ def main():
     settings_handler = CommandHandler("settings", get_settings)
     settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_")
 
-    khamis_handler = CommandHandler("khamis", khamis)
+    amlizangu_handler = CommandHandler("amlizangu", amlizangu)
     migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
 
-    khamys_handler = CommandHandler("khamys", khamys)
+    khamis_handler = CommandHandler("khamis", donate)
     migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
-
 
     # dispatcher.add_handler(test_handler)
     dispatcher.add_handler(start_handler)
@@ -470,8 +452,8 @@ def main():
     dispatcher.add_handler(help_callback_handler)
     dispatcher.add_handler(settings_callback_handler)
     dispatcher.add_handler(migrate_handler)
+    dispatcher.add_handler(amlizangu_handler)
     dispatcher.add_handler(khamis_handler)
-    dispatcher.add_handler(khamys_handler)
 
     # dispatcher.add_error_handler(error_callback)
 
@@ -530,7 +512,6 @@ def process_update(self, update):
                 handler.handle_update(update, self)
                 break
 
-            
         # Stop processing with any other handler.
         except DispatcherHandlerStop:
             self.logger.debug('Stopping further handlers due to DispatcherHandlerStop')
