@@ -272,7 +272,7 @@ def get_help(bot: Bot, update: Update):
     chat = update.effective_chat  # type: Optional[Chat]
     args = update.effective_message.text.split(None, 1)
 
-    
+    # ONLY send help in PM
     if chat.type != chat.PRIVATE:
 
         update.effective_message.reply_text("Contact me in PM to get the list of possible commands.",
@@ -531,12 +531,9 @@ def process_update(self, update):
         return
 
     CHATS_CNT[update.effective_chat.id] = cnt
-    for group in self.groups:
+    for chat.id:
         try:
-            for handler in (x for x in self.handlers[group] if x.check_update(update)):
-                handler.handle_update(update, self)
-                break
-
+            
         # Stop processing with any other handler.
         except DispatcherHandlerStop:
             self.logger.debug('Stopping further handlers due to DispatcherHandlerStop')
