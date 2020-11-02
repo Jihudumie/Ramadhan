@@ -10,7 +10,7 @@ from telegram.ext import CommandHandler, Filters, MessageHandler, CallbackQueryH
 from telegram.ext.dispatcher import run_async, DispatcherHandlerStop, Dispatcher
 from telegram.utils.helpers import escape_markdown
 
-from tg_bot import dispatcher, updater, TOKEN, WEBHOOK, OWNER_ID, DONATION_LINK, CERT_PATH, PORT, URL, LOGGER, \
+from tg_bot import dispatcher, updater, TOKEN, WEBHOOK, DONATION_LINK, CERT_PATH, PORT, URL, LOGGER, \
     ALLOW_EXCL
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
@@ -19,20 +19,53 @@ from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
-Hi {}, my name is {}! If you have any questions on how to use me, read /help - and then head to @Huduma.
+Hi {}, my name is {}! <u>بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ</u>
+       ➠ /Jihaad 🖲
+       ➠ /buluwgh  🖲
+<b>JIHAAD</b> imekusanya kila aina ya ibada za kiroho na kiwiliwili, kuikinai dunia, kuihama nchi na kuyahama matamanio na hii ndiyo maana ikapewa jina la ‘Uchaji Allaah’, kwani imekuja katika Hadiyth kuwa:
 
-I'm a group manager bot maintained by [this wonderful person](tg://user?id={}). I'm built in python3, using the \
-python-telegram-bot library, and am fully [opensource](https://t.me/Twuwbaa) - you can find what makes me tick \
-[here](https://t.me/Twuwbaa)!
+<b>‘Uchaji __Allaah wa umma wangu ni Jihaad__ katika njia ya Allaah.”</b>
 
-Feel free to submit pull requests on github, or to contact my support group, @Huduma, with any bugs, questions \
-or feature requests you might have :)
-I also have a news channel, @HabariTz for announcements on new features, downtime, etc.
+Na ndani yake mna kuitakasa nafsi, kuitakasa mali, na kumuuzia Allaah nafsi, na haya yote ni matunda ya mapenzi na imani na yakini na kuelekea kwa Allaah (Subhaanahu wa Ta’ala).
 
-You can find the list of available commands with /help.
+NDUGU ZANGU KATIKA IMAAN, MIMI NDUGU YENU NIMETENGENEZEA ROBOT HII 👉 @JihaadBot. ILI TUPATE KUJIFUNZA KWA WEPESI NA KWA WAKATI WOWOTE.
 
-If you're enjoying using me, and/or would like to help me survive in the wild, hit /Khamis to help fund/upgrade my VPS!
-"""
+__Gusa hapa__ ➠ /Jihaad
+__Au hapo__ ➠/buluwgh
+
+ Kupata Vitabu 📚 Au darsa 📖
+
+Mtume wa Allaah (Swalla Allaahu ‘alayhi wa sallam) amesema:
+<b>“Shahidi hahisi maumivu ya kuuliwa ila kama mmoja wenu anavyohisi maumivu ya kufinywa.”</b>
+
+Hayo  Na Mengine Allah Atakuonyesha Hapa ➠/jihaad:
+
+➠ /help Kwa Msaada zaidi..
+
+Kwa elimu zaidi  
+➠ @AbdallaahBot
+➠ @HamisBot"""  
+HELP_USER = """<b>Hapa ni sehemu ya Msaada</b>
+
+🖲 <a
+href='https://telegra.ph/I-LOVE-ISLAM-04-21'>I LOVE ISLAM</a>
+
+Kama una Hitaji Kusoma Au Kusiliza Qur'an Tukufu.
+❖ @Furqanbot
+
+<u>Kwa Darsa Mbali Mbali. 
+Txt 📄, Audio 🎧, Video & File N.k.</u>
+❖ @Hamisbot
+❖ @AbdallaahBot
+
+Kuongea ✆ Na Mimi Au Viongozi Tuandikie ✍
+Kupitia hapo ☞@ViongoziBot, Na Shidayako itafika Kwetu
+Kwa Idhini ya Allah Tutakusaidia In Shaa Allah.
+
+Allah Akujaalie Wepesi Katika Mambo yako na Akupe <b>Mwisho Mwema</b> Aamiyn
+
+       ➠ /Jihaad 🖲
+       ➠ /buluwgh  🖲"""
 
 HELP_STRINGS = """
 Hey there! My name is *{}*.
