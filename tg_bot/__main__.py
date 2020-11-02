@@ -531,7 +531,7 @@ def process_update(self, update):
         return
 
     CHATS_CNT[update.effective_chat.id] = cnt
-    for chat.id:
+    for group in self.groups:
         try:
             
         # Stop processing with any other handler.
